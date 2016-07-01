@@ -1,7 +1,14 @@
 package com.sample.service;
 
+import com.sample.dao.SampleDao;
+import com.sample.dto.Sample;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,15 +19,9 @@ import java.util.List;
 @Service
 public class ApiService {
     @Autowired
-    JdbcTemplate jdbcTemplate;
+    SampleDao sampleDao;
 
-    public String getStr(String tmp) {
-        try {
-            List<String> names = jdbcTemplate.queryForList("select name from samples", String.class);
-            return names.toString();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return "error";
+    public List<Sample> getStr() {
+        return sampleDao.findSamples();
     }
 }

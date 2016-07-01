@@ -22,6 +22,7 @@ dependencies {
     compile 'com.zaxxer:HikariCP:2.4.5'
     compile 'com.sparkjava:spark-core:2.5'
     compile 'com.google.code.gson:gson:2.7'
+
     testCompile("junit:junit:4.12") {
         exclude group: 'org.hamcrest'
     }

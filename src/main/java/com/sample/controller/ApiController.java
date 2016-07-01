@@ -1,8 +1,11 @@
 package com.sample.controller;
 
+import com.sample.dto.Sample;
 import com.sample.service.ApiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 import static spark.Spark.get;
 
@@ -19,8 +22,13 @@ public class ApiController extends Controller {
     void setUp() {
         get("sample", (req, res) -> {
             String param = req.queryMap("param").value();
-            String ret = apiService.getStr(param);
-            return ret;
+            try{
+                List<Sample> ret = apiService.getStr();
+                return "a";
+            } catch (Exception e){
+                System.out.println(e);
+            }
+            return "";
         });
 
     }
